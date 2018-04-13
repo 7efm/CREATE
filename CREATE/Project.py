@@ -27,35 +27,16 @@ def start():
             print(i)
         return 1
 
-def smart_user_choice():
-    rock = 0
-    paper = 0
-    scissors = 0
-    choice = regular_user_choice()
-    if choice == 0:
-        rock += 1
-    elif choice == 1:
-        paper += 1
-    elif choice == 2:
-        scissors += 1
-    if rock > paper and rock > scissors:
-        return 0
-    elif paper > scissors and paper > rock:
-        return 1
-    elif scissors > paper and scissors > rock:
-        return 2
-
 
 def smart_comp_choice():
-        predict = smart_user_choice()
-        if predict == 0:
+        if user == 0:
             return 1
-        elif predict == 1:
+        elif user == 1:
             return 2
-        elif predict == 2:
+        elif user == 2:
             return 0
         else:
-            choice = random.randint(0,2)
+            choice = random.randint(0, 2)
             return choice
 
 def regular_user_choice():
@@ -86,41 +67,53 @@ def regular_comp_choice():
 
 
 def decision():
+    comp_choice = 0
     round = 0
-    if re == 0:
-        comp = regular_comp_choice()
-        user = regular_user_choice()
-        round += 1
-    else:
-        if round >= 1:
-            comp = smart_comp_choice()
-            user = smart_user_choice()
-            round += 1
-        else:
+    while round != 5:
+        rock = 0
+        paper = 0
+        scissors = 0
+        if re == 0:
             comp = regular_comp_choice()
             user = regular_user_choice()
+            round += 1
+        else:
+            if round >= 1:
+                comp = smart_comp_choice()
+                user = regular_user_choice()
+                if user == 0:
+                    rock += 1
+                elif user == 1:
+                    paper += 1
+                else:
+                    scissors += 1
 
-    if user == 0 and comp == 1:
-        print('Sorry! Your opponent won this round by choosing paper')
+                round += 1
+            else:
+                comp = regular_comp_choice()
+                user = regular_user_choice()
 
-    elif user == 0 and comp == 2:
-        print('Nice Job! You won this round, your opponent chose scissors')
+        if user == 0 and comp == 1:
+            print('Sorry! Your opponent won this round by choosing paper')
 
-    elif user == 1 and comp == 0:
-        print('Nice Job! You won this round, your opponent chose rock')
+        elif user == 0 and comp == 2:
+            print('Nice Job! You won this round, your opponent chose scissors')
 
-    elif user == 1 and comp == 2:
-        print('Sorry! Your opponent won this round by choosing scissors')
+        elif user == 1 and comp == 0:
+            print('Nice Job! You won this round, your opponent chose rock')
 
-    elif user == 2 and comp == 0:
-        print('Sorry! Your opponent won this round by choosing rock')
+        elif user == 1 and comp == 2:
+            print('Sorry! Your opponent won this round by choosing scissors')
 
-    elif user == 2 and comp == 1:
-        print('Nice Job! You won this round, your opponent chose paper')
-    elif user == comp:
-        print("Oops, looks like you both chose %s, it's a tie" % options[comp])
-    else:
-        print('error')
+        elif user == 2 and comp == 0:
+            print('Sorry! Your opponent won this round by choosing rock')
+
+        elif user == 2 and comp == 1:
+            print('Nice Job! You won this round, your opponent chose paper')
+        elif user == comp:
+            print("Oops, looks like you both chose %s, it's a tie" % options[comp])
+        else:
+            print('error')
 
 
 # Define global variables, lists, dictionaries
