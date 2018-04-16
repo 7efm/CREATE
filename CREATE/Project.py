@@ -16,30 +16,29 @@ def start():
         print('You will play against a regular computer. ')
         print('')
         print('Enter your choice')
-        for i in options:
-            print(i)
         return 0
     elif ans == 'B':
         print('You will play against a smart computer (adapts to your choices).')
         print('')
         print('Enter your choice')
-        for i in options:
-            print(i)
         return 1
 
 
-def smart_comp_choice():
-        if user == 0:
+def smart_comp_choice(predict):
+        if predict == 0:
             return 1
-        elif user == 1:
+        elif predict == 1:
             return 2
-        elif user == 2:
+        elif predict == 2:
             return 0
         else:
             choice = random.randint(0, 2)
             return choice
 
+
 def regular_user_choice():
+    for i in options:
+        print(i)
     userchoice = input(': ')
     userchoice = userchoice.upper()
     if userchoice == 'A':
@@ -67,9 +66,10 @@ def regular_comp_choice():
 
 
 def decision():
+    predict = random.randint(0, 2)
     comp_choice = 0
     round = 0
-    while round != 5:
+    while round < 5:
         rock = 0
         paper = 0
         scissors = 0
@@ -79,7 +79,7 @@ def decision():
             round += 1
         else:
             if round >= 1:
-                comp = smart_comp_choice()
+                comp = smart_comp_choice(predict)
                 user = regular_user_choice()
                 if user == 0:
                     rock += 1
@@ -87,11 +87,20 @@ def decision():
                     paper += 1
                 else:
                     scissors += 1
-
+                if rock > paper and rock > scissors:
+                    predict = 0
+                elif paper > rock and paper > scissors:
+                    predict = 1
+                elif scissors > paper and scissors > rock:
+                    predict = 2
+                else:
+                    print("ERROR")
+                    predict = random.randint(0, 2)
                 round += 1
             else:
                 comp = regular_comp_choice()
                 user = regular_user_choice()
+                round += 1
 
         if user == 0 and comp == 1:
             print('Sorry! Your opponent won this round by choosing paper')
