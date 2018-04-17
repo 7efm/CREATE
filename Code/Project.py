@@ -39,14 +39,14 @@ def smart_comp_choice(predict):
 def regular_user_choice():
     for i in options:
         print(i)
-    userchoice = input(': ')
-    userchoice = userchoice.upper()
-    if userchoice == 'A':
+    user_choice = input(': ')
+    user_choice = user_choice.upper()
+    if user_choice == 'A':
         print('You chose rock')
         print('Wait for your opponent to choose...')
         time.sleep(2)
         return 0
-    elif userchoice == 'B':
+    elif user_choice == 'B':
         print('You chose paper')
         print('Wait for your opponent to choose...')
         time.sleep(2)
@@ -67,18 +67,17 @@ def regular_comp_choice():
 
 def decision():
     predict = random.randint(0, 2)
-    comp_choice = 0
-    round = 0
-    while round < 5:
+    rounds = 0
+    while rounds < 5:
         rock = 0
         paper = 0
         scissors = 0
         if re == 0:
             comp = regular_comp_choice()
             user = regular_user_choice()
-            round += 1
+            rounds += 1
         else:
-            if round >= 1:
+            if rounds >= 1:
                 comp = smart_comp_choice(predict)
                 user = regular_user_choice()
                 if user == 0:
@@ -96,11 +95,11 @@ def decision():
                 else:
                     print("ERROR")
                     predict = random.randint(0, 2)
-                round += 1
+                rounds += 1
             else:
                 comp = regular_comp_choice()
                 user = regular_user_choice()
-                round += 1
+                rounds += 1
 
         if user == 0 and comp == 1:
             print('Sorry! Your opponent won this round by choosing paper')
