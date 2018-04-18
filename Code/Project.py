@@ -1,6 +1,6 @@
 # imports modules, API's, libraries
 import time
-import sys
+# import sys
 import random
 # Definitions of functions, classes, etc
 
@@ -64,10 +64,14 @@ def regular_comp_choice():
     print('comp chose ' + options[choice])
     return choice
 
+# Parent Function
+
 
 def decision():
     predict = random.randint(0, 2)
     rounds = 0
+    computer_wins = 0
+    user_wins = 0
     while rounds < 5:
         rock = 0
         paper = 0
@@ -103,32 +107,43 @@ def decision():
 
         if user == 0 and comp == 1:
             print('Sorry! Your opponent won this round by choosing paper')
+            computer_wins += 1
 
         elif user == 0 and comp == 2:
             print('Nice Job! You won this round, your opponent chose scissors')
-
+            user_wins += 1
         elif user == 1 and comp == 0:
             print('Nice Job! You won this round, your opponent chose rock')
-
+            user_wins += 1
         elif user == 1 and comp == 2:
             print('Sorry! Your opponent won this round by choosing scissors')
-
+            computer_wins += 1
         elif user == 2 and comp == 0:
             print('Sorry! Your opponent won this round by choosing rock')
-
+            computer_wins += 1
         elif user == 2 and comp == 1:
             print('Nice Job! You won this round, your opponent chose paper')
+            user_wins += 1
         elif user == comp:
             print("Oops, looks like you both chose %s, it's a tie" % options[comp])
         else:
             print('error')
-
+    print('GAME OVER')
+    if user_wins > computer_wins:
+        print("You won overall, you won %a rounds out of %d" %(user_wins, rounds))
+    elif computer_wins > user_wins:
+        print("You lost overall, you lost %a rounds out of %d" %(computer_wins, rounds))
+    else:
+        print("Over 5 rounds, you both tied.")
 
 # Define global variables, lists, dictionaries
 
+# Abstractions
 userchoices = []
 level = ['A: Regular', 'B: Smart']
 options = ['A: Rock', 'B: Paper', 'C: Scissors']
+
+
 # Main Program, Program Logic or Algorithm
 re = start()
 decision()
