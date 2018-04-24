@@ -43,17 +43,17 @@ def regular_user_choice():
     user_choice = user_choice.upper()
     if user_choice == 'A':
         print('You chose rock')
-        print('Wait for your opponent to choose...')
+        print('Deciding who won...')
         time.sleep(2)
         return 0
     elif user_choice == 'B':
         print('You chose paper')
-        print('Wait for your opponent to choose...')
+        print('Deciding who won...')
         time.sleep(2)
         return 1
     else:
         print('You chose scissors')
-        print('Wait for your opponent to choose...')
+        print('Deciding who won...')
         time.sleep(2)
         return 2
 
@@ -67,7 +67,7 @@ def regular_comp_choice():
 # Parent Function
 
 
-def decision():
+def game():
     predict = random.randint(0, 2)
     rounds = 0
     computer_wins = 0
@@ -139,6 +139,8 @@ def decision():
 # Define global variables, lists, dictionaries
 
 # Abstractions
+
+
 userchoices = []
 level = ['A: Regular', 'B: Smart']
 options = ['A: Rock', 'B: Paper', 'C: Scissors']
@@ -146,4 +148,4 @@ options = ['A: Rock', 'B: Paper', 'C: Scissors']
 
 # Main Program, Program Logic or Algorithm
 re = start()
-decision()
+game()
