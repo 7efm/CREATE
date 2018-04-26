@@ -1,15 +1,20 @@
 # imports modules, API's, libraries
 import time
-# import sys
 import random
 # Definitions of functions, classes, etc
+
+
+def show_options(listx):
+    user_rounds = 0
+    for i in listx:
+        print(i)
+    user_rounds += 1
 
 
 def start():
     print("Welcome to rock, paper, scissors deluxe!")
     print("Select the computer's difficulty to begin.")
-    for i in level:
-        print(i)
+    show_options(level)
     ans = input('---> ')
     ans = ans.upper()
     if ans == 'A':
@@ -37,8 +42,7 @@ def smart_comp_choice(predict):
 
 
 def regular_user_choice():
-    for i in options:
-        print(i)
+    show_options(options)
     user_choice = input(': ')
     user_choice = user_choice.upper()
     if user_choice == 'A':
@@ -57,14 +61,36 @@ def regular_user_choice():
         time.sleep(2)
         return 2
 
+def decision(user, comp):
+    computer_wins = 0
+    user_wins = 0
+    if user == 0 and comp == 1:
+        print('Sorry! Your opponent won this round by choosing paper')
+        computer_wins += 1
+    elif user == 0 and comp == 2:
+        print('Nice Job! You won this round, your opponent chose scissors')
+        user_wins += 1
+    elif user == 1 and comp == 0:
+        print('Nice Job! You won this round, your opponent chose rock')
+        user_wins += 1
+    elif user == 1 and comp == 2:
+        print('Sorry! Your opponent won this round by choosing scissors')
+        computer_wins += 1
+    elif user == 2 and comp == 0:
+        print('Sorry! Your opponent won this round by choosing rock')
+        computer_wins += 1
+    elif user == 2 and comp == 1:
+        print('Nice Job! You won this round, your opponent chose paper')
+        user_wins += 1
+    elif user == comp:
+        print("Oops, looks like you both chose %s, it's a tie" % options[comp])
+    else:
+        print('error')
+
 
 def regular_comp_choice():
     choice = random.randint(0, 2)
-    print(choice)
-    print('comp chose ' + options[choice])
     return choice
-
-# Parent Function
 
 
 def game():
@@ -104,30 +130,7 @@ def game():
                 comp = regular_comp_choice()
                 user = regular_user_choice()
                 rounds += 1
-
-        if user == 0 and comp == 1:
-            print('Sorry! Your opponent won this round by choosing paper')
-            computer_wins += 1
-
-        elif user == 0 and comp == 2:
-            print('Nice Job! You won this round, your opponent chose scissors')
-            user_wins += 1
-        elif user == 1 and comp == 0:
-            print('Nice Job! You won this round, your opponent chose rock')
-            user_wins += 1
-        elif user == 1 and comp == 2:
-            print('Sorry! Your opponent won this round by choosing scissors')
-            computer_wins += 1
-        elif user == 2 and comp == 0:
-            print('Sorry! Your opponent won this round by choosing rock')
-            computer_wins += 1
-        elif user == 2 and comp == 1:
-            print('Nice Job! You won this round, your opponent chose paper')
-            user_wins += 1
-        elif user == comp:
-            print("Oops, looks like you both chose %s, it's a tie" % options[comp])
-        else:
-            print('error')
+        decision(user, comp)
     print('GAME OVER')
     if user_wins > computer_wins:
         print("You won overall, you won %a rounds out of %d" %(user_wins, rounds))
@@ -137,8 +140,6 @@ def game():
         print("Over 5 rounds, you both tied.")
 
 # Define global variables, lists, dictionaries
-
-# Abstractions
 
 
 userchoices = []
